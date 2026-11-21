@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thư viện số cá nhân – Nguyễn Trường Vũ</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8fbff;--card:#fff;--ink:#12303f;--mut:#58727f;--line:#c9d9e2;--note:#ffe66d;--noteink:#3b3200;--acc:#0e7490;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Be Vietnam Pro",system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+a:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.wrap{width:100%;max-width:none;margin:0;padding:24px clamp(16px,4vw,64px) 56px}
+header h1{font-size:clamp(26px,5vw,38px);font-weight:800;margin:0 0 4px;letter-spacing:-.5px}
+header p{margin:0 0 12px;color:var(--mut)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chips span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:14px;font-weight:600}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+nav a{min-width:40px;text-align:center;padding:6px 12px;border-radius:10px;background:var(--card);border:1px solid var(--line);font-weight:600}
+nav a.on{background:var(--c,var(--acc));border-color:transparent;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:12px;padding:16px;display:block;transition:transform .15s}
+.card:hover{transform:translateY(-3px)}
+.card .e{font-size:44px;line-height:1;display:block;margin-bottom:10px}
+.card b{display:block;font-size:14px;color:var(--mut)}
+.card span.t{font-weight:600}
+.hd{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.hd .big{font-size:40px;width:72px;height:72px;border-radius:20px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 18%,transparent);border:2px solid var(--c)}
+.hd h2{margin:0;font-size:clamp(20px,4vw,28px);line-height:1.2}
+.hd p{margin:0;color:var(--mut);font-size:14px}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.sec h3{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px}
+.sec h3 b{width:28px;height:28px;border-radius:8px;background:var(--c);color:#fff;display:grid;place-items:center;font-size:15px}
+.file{display:flex;align-items:center;gap:12px;border:1px dashed var(--line);border-radius:10px;padding:10px 12px}
+.file .ic{font-size:34px}
+.file .fn{font-weight:600;word-break:break-word}
+.badge{display:inline-block;font-size:12px;font-weight:800;background:#d24726;color:#fff;border-radius:4px;padding:0 6px}
+svg.dia{width:100%;height:auto;max-height:380px;display:block;color:var(--ink)}
+svg.dia text{fill:currentColor;font-family:inherit}
+
+.content-title{display:flex;align-items:center;gap:10px;margin:22px 0 12px;font-size:19px;font-weight:800;color:#172b4d}
+.content-title:before{content:"";width:5px;height:23px;border-radius:8px;background:#ef233c}
+.yt-card{position:relative;isolation:isolate;display:flex;align-items:center;gap:22px;min-height:190px;overflow:hidden;margin-top:12px;padding:26px 30px;border-radius:18px;color:#fff;background:linear-gradient(112deg,rgba(12,22,43,.96),rgba(25,45,78,.88) 52%,rgba(181,25,43,.90)),radial-gradient(circle at 78% 25%,#ff5b68,transparent 34%);box-shadow:0 14px 30px rgba(19,35,65,.18);border:1px solid rgba(255,255,255,.16);transition:transform .2s ease,box-shadow .2s ease}
+.yt-card:before{content:"";position:absolute;z-index:-1;inset:0;background:repeating-linear-gradient(135deg,transparent 0 18px,rgba(255,255,255,.035) 18px 20px)}
+.yt-card:after{content:"▶";position:absolute;z-index:-1;right:5%;top:50%;transform:translateY(-50%) rotate(-8deg);font-size:clamp(100px,18vw,190px);font-weight:900;color:rgba(255,255,255,.075);line-height:1}
+.yt-card:hover{transform:translateY(-3px);box-shadow:0 20px 38px rgba(19,35,65,.24)}
+.yt-play{flex:0 0 76px;width:76px;height:76px;display:grid;place-items:center;border-radius:22px;background:#ff1838;box-shadow:0 8px 24px rgba(255,24,56,.32);font-size:34px;padding-left:4px}
+.yt-copy{min-width:0;display:block}
+.yt-kicker{display:inline-flex;align-items:center;gap:7px;margin-bottom:8px;color:#ffb8c1;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.yt-copy strong{display:block;font-size:clamp(18px,2.5vw,24px);line-height:1.25;letter-spacing:-.3px}
+.yt-copy small{display:block;margin-top:8px;color:rgba(255,255,255,.78);font-size:13px;line-height:1.5}
+.yt-action{display:inline-flex;align-items:center;gap:8px;margin-top:15px;padding:9px 15px;border-radius:999px;background:#fff;color:#c91832;font-size:12px;font-weight:800;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+@media(max-width:560px){.yt-card{gap:15px;min-height:170px;padding:20px 17px}.yt-play{flex-basis:58px;width:58px;height:58px;border-radius:17px;font-size:26px}.yt-copy small{font-size:12px}}
+
+.vid i{font-style:normal;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:26px}
+.links{display:grid;gap:8px}
+.links a{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.links a:hover{border-color:var(--c)}
+.links small{display:block;color:var(--mut);word-break:break-all}
+.sticky{position:relative;background:var(--note);color:var(--noteink);border-radius:4px 4px 4px 28px;padding:14px;transform:rotate(-.7deg);box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.sticky:before{content:"📌";position:absolute;top:-14px;left:50%;font-size:24px}
+.sticky textarea{width:100%;min-height:150px;background:transparent;border:0;resize:vertical;font:600 16px/1.6 "Be Vietnam Pro",system-ui,sans-serif;color:inherit;padding:6px 0 0}
+.sticky textarea:focus-visible{outline-color:var(--noteink)}
+.sticky small{display:block;text-align:right;opacity:.7;min-height:1.4em}
+.pn{display:flex;justify-content:space-between;gap:10px}
+.pn a{padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-weight:600}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.k{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;background:color-mix(in srgb,var(--c) 10%,transparent);border-left:4px solid var(--c)}
+.k span{font-size:28px;line-height:1}
+.k b{display:block}
+.k p{margin:2px 0 0;color:var(--mut);font-size:14px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.bar small{text-align:left!important}
+.bar button{background:var(--noteink);color:var(--note);border:0;border-radius:8px;padding:8px 16px;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer}
+.bar button:focus-visible{outline:3px solid var(--noteink);outline-offset:2px}
+#nl{margin-top:14px}
+.ni{margin-top:10px;border:1px solid var(--line);border-left:4px solid var(--c);border-radius:10px;padding:10px 12px;background:var(--card)}
+.nh{display:flex;justify-content:space-between;align-items:center;color:var(--mut);font-size:13px}
+.nh button{background:none;border:0;cursor:pointer;font-size:16px;padding:4px}
+.ni p{margin:4px 0 0;white-space:pre-wrap}
+.em{color:var(--mut);margin:0}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+
+/* ===== Professional visual refresh ===== */
+:root{--bg:#f2f6fc;--card:#ffffff;--ink:#14243b;--mut:#65758b;--line:#e2e9f3;--acc:#2563eb;--note:#fff4c2;--noteink:#674d00}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{background:radial-gradient(ellipse at 10% 0%,rgba(59,130,246,.10),transparent 32%),linear-gradient(180deg,#edf4ff 0%,#f7f9fd 360px,#f4f7fb 100%);color:var(--ink);font-size:15px}
+.wrap{max-width:1240px;margin:0 auto;padding:34px clamp(16px,3vw,38px) 64px}
+header{position:relative;overflow:hidden;margin:-34px calc(clamp(16px,3vw,38px)*-1) 26px;padding:34px clamp(16px,3vw,38px) 26px;background:linear-gradient(120deg,#123c9b 0%,#1d4ed8 54%,#2878e8 100%);color:#fff;box-shadow:0 12px 30px rgba(30,64,175,.18)}
+header:after{content:"";position:absolute;width:360px;height:360px;right:-90px;top:-220px;border:1px solid rgba(255,255,255,.18);border-radius:50%;box-shadow:0 0 0 32px rgba(255,255,255,.035),0 0 0 68px rgba(255,255,255,.025)}
+header h1{position:relative;z-index:1;font-size:clamp(28px,4vw,40px);letter-spacing:-1.1px;margin-bottom:7px}
+header p{position:relative;z-index:1;color:rgba(255,255,255,.78);font-size:14px;margin-bottom:18px}
+.chips{position:relative;z-index:1;gap:9px;margin:0}
+.chips span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;padding:7px 13px;font-size:12px;backdrop-filter:blur(8px)}
+nav{position:sticky;top:10px;z-index:20;display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 26px;padding:10px;background:rgba(255,255,255,.86);border:1px solid rgba(218,228,242,.95);border-radius:16px;box-shadow:0 8px 24px rgba(30,55,90,.07);backdrop-filter:blur(14px)}
+nav a{min-width:42px;padding:9px 15px;border:1px solid #e5ebf5;border-radius:10px;color:#52647d;font-size:13px;transition:all .18s ease}
+nav a:first-child{padding-inline:17px}
+nav a:hover{border-color:#9dbaf4;background:#eff5ff;color:#1d4ed8;transform:translateY(-1px)}
+nav a.on{background:linear-gradient(135deg,#2563eb,#1d4ed8);border-color:transparent;color:#fff;box-shadow:0 5px 12px rgba(37,99,235,.23)}
+.grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:18px}
+.card{position:relative;isolation:isolate;overflow:hidden;min-height:188px;padding:22px;background:linear-gradient(145deg,#fff 0%,#fbfdff 100%);border:1px solid #e2eaf5;border-top:0;border-radius:18px;box-shadow:0 5px 18px rgba(25,48,85,.055);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.card:before{content:"";position:absolute;z-index:-1;left:0;right:0;top:0;height:5px;background:var(--c)}
+.card:after{content:"";position:absolute;z-index:-1;width:130px;height:130px;right:-55px;bottom:-62px;border-radius:50%;background:color-mix(in srgb,var(--c) 8%,transparent)}
+.card:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--c) 35%,#e2eaf5);box-shadow:0 16px 32px rgba(25,48,85,.11)}
+.card .e{width:64px;height:64px;display:grid;place-items:center;margin-bottom:18px;border-radius:18px;background:color-mix(in srgb,var(--c) 11%,white);font-size:34px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 12%,transparent)}
+.card b{font-size:11px;letter-spacing:1.1px;text-transform:uppercase;color:var(--c);margin-bottom:5px}
+.card span.t{display:block;font-size:16px;line-height:1.45;font-weight:700;max-width:230px}
+.hd{gap:18px;margin:4px 0 22px;padding:22px 24px;background:linear-gradient(120deg,#fff,#f6f9ff);border:1px solid #e2eaf5;border-radius:20px;box-shadow:0 6px 20px rgba(25,48,85,.055)}
+.hd .big{flex:0 0 76px;width:76px;height:76px;border:0;border-radius:22px;background:color-mix(in srgb,var(--c) 12%,white);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 20%,transparent);font-size:39px}
+.hd p{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--c);margin-bottom:5px}
+.hd h2{font-size:clamp(21px,3vw,30px);letter-spacing:-.6px;font-weight:800}
+.sec{padding:21px;margin-bottom:17px;border:1px solid #e3eaf4;border-radius:18px;box-shadow:0 5px 18px rgba(25,48,85,.045)}
+.sec h3{font-size:15px;font-weight:800;letter-spacing:.1px;margin-bottom:17px}
+.sec h3 b{width:30px;height:30px;border-radius:10px;box-shadow:0 4px 9px color-mix(in srgb,var(--c) 22%,transparent)}
+.kp{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.k{padding:15px;border:1px solid color-mix(in srgb,var(--c) 13%,#e8eef7);border-left:4px solid var(--c);border-radius:13px;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 7%,white),#fff);transition:transform .18s ease,box-shadow .18s ease}
+.k:hover{transform:translateY(-2px);box-shadow:0 7px 15px rgba(25,48,85,.06)}
+.k span{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:12px;background:#fff;box-shadow:0 2px 8px rgba(20,40,70,.07);font-size:23px}
+.k b{font-size:14px}
+.k p{font-size:13px;line-height:1.6;margin-top:5px}
+.file{padding:14px 16px;border:1px dashed #c9d7e9;background:#f8fbff;border-radius:13px}
+.file .ic{width:48px;height:48px;display:grid;place-items:center;border-radius:13px;background:#eaf1ff;font-size:27px}
+.file .fn{font-size:14px}
+.badge{border-radius:5px;padding:2px 7px;font-size:10px;letter-spacing:.5px}
+svg.dia{max-height:400px;padding:16px;border:1px solid #e5edf7;border-radius:16px;background:radial-gradient(circle at 50% 40%,#fff,#f7faff)}
+.vid{aspect-ratio:16/5;max-height:190px;border-radius:16px;background:linear-gradient(130deg,var(--c),color-mix(in srgb,var(--c) 62%,#172554));box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);transition:filter .2s,transform .2s}
+.vid:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.vid i{width:60px;height:60px;border:1px solid rgba(255,255,255,.35);box-shadow:0 7px 20px rgba(0,0,0,.12)}
+.links{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.links a{min-width:0;padding:13px;border-color:#e5ebf4;border-radius:13px;background:#fbfdff;transition:all .18s ease}
+.links a:hover{background:#f2f7ff;transform:translateY(-2px);box-shadow:0 6px 14px rgba(25,48,85,.06)}
+.links a span:first-child{width:40px;height:40px;flex:0 0 40px;display:grid;place-items:center;border-radius:12px;background:#eaf2ff;font-size:20px!important}
+.links b{font-size:13px}
+.links small{font-size:11px;margin-top:3px}
+.sticky{transform:none;border-radius:15px;padding:18px;background:linear-gradient(135deg,#fff9df,#fff3bf);box-shadow:inset 0 0 0 1px rgba(176,137,0,.13),0 5px 15px rgba(80,65,0,.06)}
+.sticky:before{content:none}
+.sticky textarea{min-height:130px;font-size:14px;font-weight:500;line-height:1.7}
+.bar button{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:white;border-radius:10px;padding:10px 17px;box-shadow:0 4px 10px rgba(37,99,235,.2)}
+.bar button:hover{filter:brightness(1.08)}
+.ni{border:1px solid #e5ebf4;border-left:4px solid var(--c);border-radius:13px;padding:13px;background:#fbfdff}
+.ni p{font-size:14px;line-height:1.65}
+.pn{margin-top:22px}
+.pn a{padding:11px 17px;border-radius:11px;border-color:#dce6f3;color:#2455ad;box-shadow:0 3px 10px rgba(25,48,85,.04);transition:all .18s}
+.pn a:hover{background:#eff5ff;border-color:#b8cdf5;transform:translateY(-1px)}
+.em{font-size:13px;padding:12px}
+@media(max-width:640px){
+ .wrap{padding:20px 13px 42px}
+ header{margin:-20px -13px 18px;padding:26px 16px 21px}
+ .chips span{font-size:11px;padding:6px 9px}
+ nav{top:6px;gap:6px;padding:8px;border-radius:13px;margin-bottom:18px}
+ nav a{min-width:36px;padding:8px 11px;font-size:12px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ .card{min-height:160px;padding:15px;border-radius:15px}
+ .card .e{width:52px;height:52px;font-size:28px;margin-bottom:13px;border-radius:15px}
+ .card span.t{font-size:13px}
+ .hd{padding:16px;gap:13px;border-radius:16px}
+ .hd .big{flex-basis:58px;width:58px;height:58px;font-size:30px;border-radius:17px}
+ .sec{padding:15px;border-radius:15px}
+ .kp{grid-template-columns:1fr}
+ .links{grid-template-columns:1fr}
+ .pn a{padding:10px 12px;font-size:12px}
+}
+@media(max-width:360px){.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.k,.vid,.links a,.pn a{transition:none}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Thư viện số cá nhân</h1>
+<p>Assignment phần 1 · Hệ thống lưu trữ học tập</p>
+<div class="chips"><span>Nguyễn Trường Vũ</span><span>MSSV: PK04770</span><span>Lớp: WD22301</span><span>Môn: CNTT 4.0</span></div>
+</header>
+<nav id="nav" aria-label="Danh mục bài học"></nav>
+<main id="app"></main>
+</div>
+<script>
+var L=[
+{n:'CMCN 4.0 &amp; Chuyển đổi số',f:'Slide_1 - Tổng quan về CMCN 4.0, CNTT 4.0, CĐS.pptx',e:'🏭',c:'#0e7490',t:'flow',yt:'cách mạng công nghiệp 4.0 là gì',
+ d:[['⚙️','1.0 Hơi nước'],['⚡','2.0 Điện'],['💻','3.0 Máy tính'],['🤖','4.0 AI · IoT']],
+ k:'Hơi nước → Điện → Máy tính → AI.\nChúng ta đang sống trong CMCN 4.0.',
+ l:[['Wikipedia – Fourth Industrial Revolution','https://en.wikipedia.org/wiki/Fourth_Industrial_Revolution'],['World Economic Forum','https://www.weforum.org/stories/2016/01/the-fourth-industrial-revolution-what-it-means-and-how-to-respond/']]},
+{n:'Kiến trúc &amp; Phần cứng máy tính',f:'Slide_2 - Computer, Hardware.pptx',e:'🖥️',c:'#7c3aed',t:'flow',yt:'phần cứng máy tính CPU RAM',
+ d:[['⌨️','Input'],['🧠','CPU'],['🖥️','Output'],['💾','Storage']],
+ k:'Input → Process → Output → Storage.\nCPU là bộ não, RAM là bộ nhớ tạm, ổ cứng lưu lâu dài.',
+ l:[['Wikipedia – Computer hardware','https://en.wikipedia.org/wiki/Computer_hardware'],['Wikipedia – CPU','https://en.wikipedia.org/wiki/Central_processing_unit']]},
+{n:'Hệ điều hành &amp; Đa nền tảng',f:'Slide_3 - Operating System.pptx',e:'🪟',c:'#ea580c',t:'hub',m:'OS',i:'🖥️',yt:'hệ điều hành là gì Windows Linux Docker',
+ d:[['🪟','Windows'],['🍎','macOS'],['🐧','Linux'],['🤖','Android'],['🐳','Docker']],
+ k:'OS điều phối CPU, RAM, thiết bị cho ứng dụng.\nMáy ảo: an toàn hơn. Container: nhẹ và nhanh hơn.',
+ l:[['Wikipedia – Operating system','https://en.wikipedia.org/wiki/Operating_system'],['Wikipedia – Docker','https://en.wikipedia.org/wiki/Docker_(software)']]},
+{n:'Phần mềm, Đám mây, Nền tảng',f:'Slide_4 - Software, Cloud, Platform.pptx',e:'☁️',c:'#2563eb',t:'hub',m:'Phần mềm',i:'🧰',yt:'cloud computing là gì',
+ d:[['🧱','Hệ thống'],['🧰','Ứng dụng'],['📝','Office'],['☁️','Cloud'],['🏗️','Nền tảng']],
+ k:'Phần mềm gồm hệ thống và ứng dụng.\nCloud: lưu trữ và xử lý dữ liệu qua Internet.',
+ l:[['Wikipedia – Software','https://en.wikipedia.org/wiki/Software'],['Wikipedia – Cloud computing','https://en.wikipedia.org/wiki/Cloud_computing']]},
+{n:'Mạng máy tính, Internet &amp; IoT',f:'Slide_5 - Network, Internet, IOT.pptx',e:'🌐',c:'#059669',t:'flow',yt:'mạng máy tính internet IoT 6G',
+ d:[['📱','Thiết bị'],['📡','Router'],['🌐','Internet'],['☁️','Máy chủ'],['🏠','IoT']],
+ k:'Mạng di động phát triển đến 5G, hướng tới 6G.\nIoT: vạn vật kết nối Internet.',
+ l:[['Wikipedia – Internet of things','https://en.wikipedia.org/wiki/Internet_of_things'],['Wikipedia – 6G','https://en.wikipedia.org/wiki/6G']]},
+{n:'Tư duy lập trình &amp; Tự động hóa',f:'Slide_6 - Computational thinking, IT Automation.pptx',e:'🧩',c:'#db2777',t:'flow',yt:'tư duy lập trình low-code vibe coding',
+ d:[['🧩','Phân rã'],['🔍','Nhận dạng mẫu'],['🎯','Trừu tượng hóa'],['📋','Thuật toán']],
+ k:'Chia nhỏ vấn đề, tìm điểm giống, tập trung bản chất, viết từng bước.\nVibe-code: mô tả bằng lời để AI viết code.',
+ l:[['Wikipedia – Computational thinking','https://en.wikipedia.org/wiki/Computational_thinking'],['Wikipedia – Vibe coding','https://en.wikipedia.org/wiki/Vibe_coding']]},
+{n:'AI &amp; Dữ liệu trong học tập',f:'Slide_7 - AI, Data in studying, working.pptx',e:'🤖',c:'#ca8a04',t:'hub',m:'AI',i:'🤖',yt:'prompt engineering là gì',
+ d:[['📊','Dữ liệu'],['✍️','Prompt'],['💬','Chatbot'],['🎓','Học tập'],['💼','Công việc']],
+ k:'Dữ liệu là nguyên liệu, AI là động cơ.\nPrompt rõ ràng, đủ ngữ cảnh thì AI trả lời tốt hơn.',
+ l:[['Wikipedia – Artificial intelligence','https://en.wikipedia.org/wiki/Artificial_intelligence'],['Wikipedia – Prompt engineering','https://en.wikipedia.org/wiki/Prompt_engineering']]},
+{n:'An toàn thông tin &amp; Đạo đức số',f:'Slide_8 - An toàn thông tin và Đạo đức số.pptx',e:'🛡️',c:'#dc2626',t:'hub',m:'CIA',i:'🛡️',yt:'nhận biết deepfake an toàn thông tin',
+ d:[['🔒','Bảo mật'],['✅','Toàn vẹn'],['⚡','Sẵn sàng'],['🎭','Deepfake'],['⚖️','Luật VN']],
+ k:'CIA: bảo mật, toàn vẹn, sẵn sàng.\nLuật An ninh mạng 24/2018, Luật AI 134/2025, Luật Bảo vệ dữ liệu cá nhân 91/2025.',
+ l:[['ISO/IEC 27001','https://www.iso.org/standard/27001'],['Thư viện Pháp luật','https://thuvienphapluat.vn']]}
+];
+var P=[
+[['🕰️','Mốc thời gian','1760 · 1870 · 1970 · 2010'],['🔗','CNTT 4.0','Kết nối con người, thiết bị và hệ thống qua Internet'],['🧠','Công nghệ lõi','AI, IoT, Big Data, Cloud'],['🔄','Chuyển đổi số','Dùng công nghệ số để đổi cách làm việc và vận hành']],
+[['📜','5 thế hệ máy tính','Bóng chân không, Transistor, IC, Vi xử lý, AI'],['🧠','CPU','Hiệu năng phụ thuộc xung nhịp (GHz) và số nhân'],['🗂️','Phân loại','Siêu máy tính, mainframe, server, PC'],['📱','Thiết bị cá nhân','Desktop, laptop, tablet, smartphone']],
+[['🧭','Vai trò','Điều phối tài nguyên giữa phần cứng và phần mềm'],['🌍','Hệ sinh thái hợp nhất','Nhiều thiết bị, một trải nghiệm liền mạch'],['🐳','Ảo hóa','Máy ảo (VM) và Container (Docker)'],['✨','OS tích hợp AI','Hệ điều hành có trợ lý AI đi kèm']],
+[['📘','Định nghĩa theo IEEE','Chương trình, quy trình, tài liệu và dữ liệu'],['🧱','Hai nhóm chính','Phần mềm hệ thống và phần mềm ứng dụng'],['🧰','Phần mềm cơ bản','Office, nén file, bộ gõ, trình duyệt, đọc PDF'],['☁️','Đám mây','Lưu trữ và xử lý dữ liệu qua Internet']],
+[['🕸️','Mạng máy tính','Kết nối thiết bị để chia sẻ dữ liệu'],['🌐','Internet và WWW','Mạng toàn cầu và hệ thống trang web'],['📶','Không dây và di động','Wi-Fi, mạng di động, hướng tới 6G'],['🏠','IoT','Thiết bị gửi và nhận dữ liệu qua Internet']],
+[['🧩','Tư duy tính toán','Tập trung bản chất, tìm điểm tương đồng, chỉ dẫn từng bước'],['⚠️','Giới hạn','Máy tính khuếch đại trí tuệ, tự nó không có trí tuệ'],['🤖','Tự động hóa','Cấp doanh nghiệp (BPA), ứng dụng (RPA), hạ tầng (IaC)'],['🛠️','Low-code, No-code, Vibe-code','Tạo ứng dụng với ít hoặc không cần viết code']],
+[['🧠','Trí tuệ nhân tạo','Máy học từ dữ liệu để nhận diện và dự đoán'],['⛽','Dữ liệu','Big Data là nguyên liệu thô, AI là động cơ'],['✍️','Prompt Engineering','Viết yêu cầu rõ ràng để AI trả lời đúng ý'],['🎓','Ứng dụng','Dùng AI trong học tập và công việc']],
+[['🔺','Mô hình CIA','Bảo mật, toàn vẹn, sẵn sàng'],['📋','ISMS (ISO 27000)','Hệ thống quản lý an toàn thông tin, cải tiến liên tục'],['🎭','Deepfake','Nội dung giả do AI tạo ra, cần biết nhận diện'],['⚖️','Luật Việt Nam','An ninh mạng, Trí tuệ nhân tạo, Bảo vệ dữ liệu cá nhân']]
+];
+function esc(s){return String(s).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'>'.replace('>','&gt;')}[c]})}
+function KP(i){return P[i-1].map(function(x){return '<div class="k"><span>'+x[0]+'</span><div><b>'+x[1]+'</b><p>'+x[2]+'</p></div></div>'}).join('')}
+var $=function(s){return document.querySelector(s)};
+var st={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+function dia(l){
+ var n=l.d.length,c=l.c,s='',ln='',nd='';
+ if(l.t==='flow'){
+  var g=720/n;
+  l.d.forEach(function(x,i){var cx=g*i+g/2;
+   if(i)s+='<path d="M'+(cx-g+46)+' 80H'+(cx-48)+'" stroke="'+c+'" stroke-width="3" marker-end="url(#a)"/>';
+   s+='<circle cx="'+cx+'" cy="80" r="40" fill="'+c+'" fill-opacity=".16" stroke="'+c+'" stroke-width="2.5"/><text x="'+cx+'" y="92" font-size="36" text-anchor="middle">'+x[0]+'</text><text x="'+cx+'" y="148" font-size="16" font-weight="600" text-anchor="middle">'+x[1]+'</text>';
+  });
+  return '<svg class="dia" viewBox="0 0 720 175" role="img" aria-label="Sơ đồ bài học"><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="'+c+'"/></marker></defs>'+s+'</svg>';
+ }
+ l.d.forEach(function(x,i){
+  var a=-Math.PI/2+i*2*Math.PI/n,px=360+Math.cos(a)*260,py=150+Math.sin(a)*100;
+  ln+='<line x1="360" y1="150" x2="'+px+'" y2="'+py+'" stroke="'+c+'" stroke-width="2.5" stroke-dasharray="6 5"/>';
+  nd+='<circle cx="'+px+'" cy="'+py+'" r="32" fill="var(--card)" stroke="'+c+'" stroke-width="2.5"/><text x="'+px+'" y="'+(py+10)+'" font-size="28" text-anchor="middle">'+x[0]+'</text><text x="'+px+'" y="'+(py+54)+'" font-size="15" font-weight="600" text-anchor="middle">'+x[1]+'</text>';
+ });
+ return '<svg class="dia" viewBox="0 0 720 320" role="img" aria-label="Sơ đồ bài học">'+ln+'<circle cx="360" cy="150" r="52" fill="'+c+'"/><text x="360" y="150" font-size="34" text-anchor="middle" style="fill:#fff">'+l.i+'</text><text x="360" y="182" font-size="14" font-weight="800" text-anchor="middle" style="fill:#fff">'+l.m+'</text>'+nd+'</svg>';
+}
+function nav(cur){
+ var h='<a href="#home" class="'+(cur?'':'on')+'">Mục lục</a>';
+ L.forEach(function(l,i){h+='<a href="#bai-'+(i+1)+'" title="Bài '+(i+1)+'" aria-label="Bài '+(i+1)+'" style="--c:'+l.c+'" class="'+(cur===i+1?'on':'')+'">'+(i+1)+'</a>'});
+ $('#nav').innerHTML=h;
+}
+function home(){
+ document.title='Thư viện số cá nhân – Nguyễn Trường Vũ';
+ $('#app').innerHTML='<div class="grid">'+L.map(function(l,i){return '<a class="card" style="--c:'+l.c+'" href="#bai-'+(i+1)+'"><span class="e">'+l.e+'</span><b>Bài '+(i+1)+'</b><span class="t">'+l.n+'</span></a>'}).join('')+'</div>';
+}
+function lesson(i){
+ var l=L[i-1],key='notes-bai-'+i,ns;try{ns=JSON.parse(st.get(key))}catch(e){ns=null}if(!Array.isArray(ns))ns=[{t:'Ghi chú mẫu',x:l.k}];
+ document.title='Bài '+i+' – Thư viện số cá nhân';
+ var links=l.l.map(function(x){return '<a href="'+x[1]+'" target="_blank" rel="noopener noreferrer"><span style="font-size:26px">🔗</span><span><b>'+x[0]+'</b><small>'+x[1]+'</small></span></a>'}).join('');
+ var pv=i>1?'<a href="#bai-'+(i-1)+'">‹ Bài '+(i-1)+'</a>':'<span></span>',nx=i<8?'<a href="#bai-'+(i+1)+'">Bài '+(i+1)+' ›</a>':'<span></span>';
+ $('#app').innerHTML='<div style="--c:'+l.c+'"><div class="hd"><span class="big">'+l.e+'</span><div><p>Bài '+i+' / 8</p><h2>Bài '+i+'. '+l.n+'</h2></div></div>'
+ +'<section class="sec"><h3><b>★</b>Kiến thức trọng tâm</h3><div class="kp">'+KP(i)+'</div></section><section class="sec"><h3><b>a</b>Tệp tin</h3><div class="file"><span class="ic">📄</span><div><div class="fn">'+l.f+'</div><span class="badge">PPTX</span></div></div></section>'
+ +'<section class="sec"><h3><b>b</b>Hình ảnh / Video</h3>'+dia(l)+'<h3 class="content-title">Nội dung</h3><a class="yt-card" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/results?search_query='+encodeURIComponent(l.yt)+'" aria-label="Xem video minh họa bài '+i+' trên YouTube"><span class="yt-play">▶</span><span class="yt-copy"><span class="yt-kicker">▶ YouTube · Video học tập</span><strong>Xem video minh họa bài '+i+'</strong><small>'+l.yt+' · Nhấn để mở danh sách video liên quan trên YouTube</small><span class="yt-action">XEM TRÊN YOUTUBE <span aria-hidden="true">↗</span></span></span></a></section>'
+ +'<section class="sec"><h3><b>c</b>Link tham chiếu</h3><div class="links">'+links+'</div></section>'
+ +'<section class="sec"><h3><b>d</b>Ghi chú của bản thân</h3><div class="sticky"><textarea id="nt" placeholder="Vừa học xong? Viết ghi chú của bạn tại đây..." aria-label="Ghi chú mới bài '+i+'"></textarea><div class="bar"><small id="sv"></small><button type="button" id="sb">Lưu ghi chú</button></div></div><div id="nl"></div></section>'
+ +'<div class="pn">'+pv+nx+'</div></div>';
+ function draw(){$('#nl').innerHTML=ns.length?ns.map(function(n,j){return '<article class="ni"><div class="nh"><span>'+esc(n.t)+'</span><button type="button" data-j="'+j+'" aria-label="Xóa ghi chú">🗑️</button></div><p>'+esc(n.x)+'</p></article>'}).join(''):'<p class="em">Chưa có ghi chú nào. Hãy viết ghi chú đầu tiên của bạn.</p>'}
+ function save(){var v=$('#nt').value.trim();if(!v){$('#sv').textContent='Hãy nhập nội dung trước khi lưu';return}ns.unshift({t:new Date().toLocaleString('vi-VN'),x:v});st.set(key,JSON.stringify(ns));$('#nt').value='';$('#sv').textContent='Đã lưu ghi chú';draw()}
+ $('#sb').addEventListener('click',save);$('#nt').addEventListener('keydown',function(e){if(e.ctrlKey&&e.key==='Enter')save()});
+ $('#nl').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;ns.splice(+b.dataset.j,1);st.set(key,JSON.stringify(ns));draw()});draw();
+}
+function route(){
+ var m=/^bai-([1-8])$/.exec(location.hash.slice(1)),i=m?+m[1]:0;
+ nav(i);if(i)lesson(i);else home();window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);route();
+</script>
+</body>
+</html>
